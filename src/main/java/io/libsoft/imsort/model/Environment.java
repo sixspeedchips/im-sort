@@ -38,8 +38,6 @@ public class Environment {
     return shuffler.getMat();
   }
 
-
-
   public void reset(){
     shuffler.reset();
   }

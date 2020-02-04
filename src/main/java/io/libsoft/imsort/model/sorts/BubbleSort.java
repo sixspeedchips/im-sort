@@ -28,9 +28,7 @@ public class BubbleSort implements Sorter {
       });
       t.start();
       t.join();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    } catch (InterruptedException e) {}
   }
   @Override
   public String toString() {

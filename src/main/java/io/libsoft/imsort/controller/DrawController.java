@@ -45,7 +45,7 @@ public class DrawController {
     environment = new Environment(
         Imgcodecs.imread("E:\\Projects\\JAVA\\ga-draw-java\\src\\main\\resources\\me2.jpg",
             Imgcodecs.CV_LOAD_IMAGE_COLOR),
-        new Size(300, 300));
+        new Size(400,400));
     environment.setSort(chooser.getSelectionModel().getSelectedItem());
     sortViewer.setEnv(environment);
     updateView();

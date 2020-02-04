@@ -24,7 +24,7 @@ public class SortViewer extends Pane {
     original = new ImageView();
     shuffled = new ImageView();
     byteMat = new MatOfByte();
-    getChildren().addAll(new HBox(original, shuffled));
+    getChildren().addAll(new HBox(shuffled));
 
   }
 

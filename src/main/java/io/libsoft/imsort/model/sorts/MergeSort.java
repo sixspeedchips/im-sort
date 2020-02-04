@@ -6,25 +6,25 @@ public class MergeSort implements Sorter {
 
   private Pixel[] pixels;
 
-  public static void mergeSort(Pixel[] array) {
-    if (array == null) {
+  public void mergeSort() {
+    if (pixels == null) {
       return;
     }
 
-    if (array.length > 1) {
-      int mid = array.length / 2;
+    if (pixels.length > 1) {
+      int mid = pixels.length / 2;
 
       Pixel[] left = new Pixel[mid];
       for (int i = 0; i < mid; i++) {
-        left[i] = array[i];
+        left[i] = pixels[i];
       }
 
-      Pixel[] right = new Pixel[array.length - mid];
-      for (int i = mid; i < array.length; i++) {
-        right[i - mid] = array[i];
+      Pixel[] right = new Pixel[pixels.length - mid];
+      for (int i = mid; i < pixels.length; i++) {
+        right[i - mid] = pixels[i];
       }
-      mergeSort(left);
-      mergeSort(right);
+//      mergeSort(left);
+//      mergeSort(right);
 
       int i = 0;
       int j = 0;
@@ -32,23 +32,23 @@ public class MergeSort implements Sorter {
 
       // Merge left and right arrays
       while (i < left.length && j < right.length) {
-        if (array[i].compareTo(array[j]) <= 0) {
-          array[k] = left[i];
+        if (pixels[i].compareTo(pixels[j]) <= 0) {
+          pixels[k] = left[i];
           i++;
         } else {
-          array[k] = right[j];
+          pixels[k] = right[j];
           j++;
         }
         k++;
       }
       // Collect remaining elements
       while (i < left.length) {
-        array[k] = left[i];
+        pixels[k] = left[i];
         i++;
         k++;
       }
       while (j < right.length) {
-        array[k] = right[j];
+        pixels[k] = right[j];
         j++;
         k++;
       }
@@ -62,8 +62,7 @@ public class MergeSort implements Sorter {
     }
     try {
       Thread t = new Thread(() -> {
-        mergeSort(pixels);
-        System.out.println("MergeSort.start");
+        mergeSort();
       });
       t.start();
       t.join();

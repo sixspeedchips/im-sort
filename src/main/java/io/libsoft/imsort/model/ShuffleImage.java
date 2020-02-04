@@ -15,7 +15,7 @@ public class ShuffleImage {
   private int count = 0;
   private Sorter sort;
 
-  public ShuffleImage(Mat original) {
+  public  ShuffleImage(Mat original) {
     mat = new Mat(original.size(), original.type());
     pixels = new Pixel[(int) original.size().height * (int) original.size().width];
     int count = 0;
