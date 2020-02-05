@@ -1,7 +1,5 @@
 package io.libsoft.imsort.model;
 
-import io.libsoft.imsort.model.sorts.BubbleSort;
-import io.libsoft.imsort.model.sorts.InsertionSort;
 import io.libsoft.imsort.model.sorts.Sorter;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -12,12 +10,12 @@ public class Environment {
 
 
   private Mat original;
-  private ShuffleImage shuffler;
+  private ImageShuffler shuffler;
 
   public Environment(Mat raw, Size size) {
     original = Mat.zeros(size, CvType.CV_8SC3);
     Imgproc.resize(raw, original, size, 0, 0, Imgproc.INTER_AREA);
-    shuffler = new ShuffleImage(original);
+    shuffler = new ImageShuffler(original);
   }
 
 

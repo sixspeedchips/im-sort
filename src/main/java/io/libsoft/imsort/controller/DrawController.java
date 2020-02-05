@@ -1,19 +1,24 @@
 package io.libsoft.imsort.controller;
 
 import io.libsoft.imsort.model.Environment;
+import io.libsoft.imsort.utils.Constants;
 import io.libsoft.imsort.view.AlgorithmChooser;
+import io.libsoft.imsort.view.ChooseFile;
 import io.libsoft.imsort.view.SortViewer;
+import java.io.File;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 
 public class DrawController {
 
 
-  private static final long MS_SLEEP = 16;
+  private static final long MS_SLEEP = 5;
 
   @FXML
   public Button shuffleButton;
@@ -28,24 +33,29 @@ public class DrawController {
   public SortViewer sortViewer;
   @FXML
   public AlgorithmChooser chooser;
+  @FXML
+  public ChooseFile chooseFile;
 
   private int iterations = 1000;
   private boolean running;
   private Environment environment;
   private Updater updater;
-
+  private File file;
+  private File lastDirectory;
+  private Size size;
 
   @FXML
   private void initialize() {
+    file = new File("E:\\Projects\\JAVA\\im-sort\\src\\main\\resources\\lonamisa.jpg");
+    size = new Size(Constants.SIZE,Constants.SIZE);
     initEnv();
     updater = new Updater();
   }
 
   private void initEnv() {
     environment = new Environment(
-        Imgcodecs.imread("E:\\Projects\\JAVA\\ga-draw-java\\src\\main\\resources\\me2.jpg",
-            Imgcodecs.CV_LOAD_IMAGE_COLOR),
-        new Size(400,400));
+        Imgcodecs.imread(file.getAbsolutePath(), Imgcodecs.CV_LOAD_IMAGE_COLOR),
+        size);
     environment.setSort(chooser.getSelectionModel().getSelectedItem());
     sortViewer.setEnv(environment);
     updateView();
@@ -93,11 +103,13 @@ public class DrawController {
       shuffleButton.setDisable(true);
       chooser.setDisable(true);
       sortButton.setDisable(true);
+      chooseFile.setDisable(true);
     } else {
       chooser.setDisable(false);
       reset.setDisable(false);
       shuffleButton.setDisable(false);
       sortButton.setDisable(false);
+      chooseFile.setDisable(false);
       updateView();
     }
   }
@@ -111,6 +123,19 @@ public class DrawController {
 
   public void selectAlgorithm(ActionEvent actionEvent) {
     environment.setSort(chooser.getSelectionModel().getSelectedItem());
+  }
+
+
+  public void chooser(ActionEvent actionEvent) {
+    FileChooser fileChooser = new FileChooser();
+    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("images (*.png/jpg)",
+        "*.png", "*.jpg");
+    fileChooser.getExtensionFilters().add(extFilter);
+    fileChooser.setInitialDirectory(lastDirectory == null ? new File(".") : lastDirectory);
+    if ((file = fileChooser.showOpenDialog(new Stage()))!= null){
+      lastDirectory = file.getParentFile();
+      initEnv();
+    }
   }
 
 

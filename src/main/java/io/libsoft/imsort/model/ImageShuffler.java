@@ -5,23 +5,28 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
-public class ShuffleImage {
+public class ImageShuffler {
 
 
+  private Mat hls;
   private Pixel[] pixels;
   private Mat mat;
   private Random random = new SecureRandom();
   private int count = 0;
   private Sorter sort;
 
-  public  ShuffleImage(Mat original) {
+  public ImageShuffler(Mat original) {
     mat = new Mat(original.size(), original.type());
+    hls = new Mat(original.size(), original.type());
     pixels = new Pixel[(int) original.size().height * (int) original.size().width];
+    Imgproc.cvtColor(original, hls, Imgproc.COLOR_RGB2HLS);
     int count = 0;
     for (int i = 0; i < original.rows(); i++) {
       for (int j = 0; j < original.cols(); j++) {
-        pixels[count++] = new Pixel(original.get(i, j), i, j);
+        pixels[count++] = new Pixel(original.get(i, j), hls.get(i,j), i, j);
+
       }
     }
 

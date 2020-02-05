@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import io.libsoft.imsort.view.SortViewer?>
 <?import io.libsoft.imsort.view.AlgorithmChooser?>
+<?import io.libsoft.imsort.view.ChooseFile?>
 <VBox
   xmlns:fx="http://javafx.com/fxml"
   stylesheets="styles.css"
@@ -16,7 +17,11 @@
   fx:controller="io.libsoft.imsort.controller.DrawController">
 
   <HBox>
-
+    <ChooseFile
+      text="File"
+      fx:id="chooseFile"
+      onAction="#chooser"
+    />
     <Button
       text="Reset"
       fx:id="reset"
@@ -27,7 +32,7 @@
       </tooltip>
 
     </Button>
-    <ToggleButton
+    <Button
       text="Shuffle"
       fx:id="shuffleButton"
       onAction="#shuffle">
@@ -36,7 +41,7 @@
         <Tooltip text="%toggle_text"/>
       </tooltip>
 
-    </ToggleButton>
+    </Button>
     <Button
       text="Sort"
       fx:id="sortButton"

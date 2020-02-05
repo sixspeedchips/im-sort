@@ -1,22 +1,19 @@
+Scene {
+  -fx-background-color: GREY;
+}
 
 VBox {
   -fx-padding: 10px;
   -fx-spacing: 10px;
+  -fx-background-color: black;
 }
 
-VBox#labelBox {
-  -fx-spacing: -10px;
-  -fx-background-color: lightgrey;
-  -fx-border-color: black;
-  -fx-label-padding: 1px;
-  -fx-pref-height: 50px;
-  -fx-pref-width: 225px;
-  -fx-horizontal-grid-lines-visible: true;
-}
+
 HBox {
 
   -fx-alignment: center-left;
   -fx-spacing: 10px;
+
 }
 
 
@@ -25,10 +22,11 @@ Label {
 }
 
 Button, ToggleButton {
-  -fx-pref-width: 50px;
+  -fx-pref-width: 100px;
   -fx-pref-height: 25px;
   -fx-min-width: 25px;
   -fx-min-height: 25px;
+  -fx-background-color: lightgrey;
 
 }
 
